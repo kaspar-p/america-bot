@@ -65,6 +65,7 @@ var WordMap = map[string]string{
 	"smoulder":     "smolder",
 	"sombre":       "somber",
 	"sulphate":     "sulfate",
+	"rumour":       "rumor",
 	"sulphur":      "sulfur",
 	"tranquillize": "tranquilize",
 	"tumour":       "tumor",
