@@ -22,7 +22,7 @@ var WordMap = map[string]string{
 	"defence":      "defense",
 	"dialogue":     "dialog",
 	"aeon":         "eon",
-	"favour":       "favor",
+	"favour ":      "favor ",
 	"favourite":    "favorite",
 	"fervour":      "fervor",
 	"fibre":        "fiber",
