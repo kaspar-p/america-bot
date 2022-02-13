@@ -17,6 +17,7 @@ var WordMap = map[string]string{
 	"colour":       "color",
 	"counsellor":   "counselor",
 	"clamour":      "clamor",
+	"tyre":         "tire",
 	"crueller":     "cruelest",
 	"crystallize":  "crystalize",
 	"defence":      "defense",
