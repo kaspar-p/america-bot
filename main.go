@@ -17,11 +17,14 @@ func isReady(session *discordgo.Session, ready *discordgo.Ready) {
 func messageHandler(session *discordgo.Session, message *discordgo.MessageCreate) {
 	wordsWrong := make([]string, 0)
 
+	searchString := message.Content
 	for canadianWord, americanWord := range WordMap {
-		wordIndex := strings.Index(message.Content, canadianWord)
+		wordIndex := strings.Index(searchString, canadianWord)
 		if wordIndex != -1 {
 			log.Printf("Replaced %s with %s", canadianWord, americanWord)
+
 			wordsWrong = append(wordsWrong, "*"+americanWord)
+			searchString = strings.ReplaceAll(searchString, canadianWord, americanWord)
 		}
 	}
 
