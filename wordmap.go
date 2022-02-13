@@ -28,6 +28,7 @@ var WordMap = map[string]string{
 	"fervour":      "fervor",
 	"fibre":        "fiber",
 	"flavour":      "flavor",
+	"programme":    "program",
 	"fulfil":       "fulfill",
 	"gruelling":    "grueling",
 	"harbour":      "harbor",
