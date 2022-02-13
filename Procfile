@@ -1,1 +1,1 @@
-worker: bin
+worker: bin/america-bot
