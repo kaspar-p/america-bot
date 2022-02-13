@@ -24,7 +24,7 @@ func messageHandler(session *discordgo.Session, message *discordgo.MessageCreate
 			log.Printf("Replaced %s with %s", canadianWord, americanWord)
 
 			wordsWrong = append(wordsWrong, "*"+americanWord)
-			searchString = strings.Replace(searchString, " "+canadianWord+" ", " "+americanWord+" ")
+			searchString = strings.Replace(searchString, canadianWord+" ", americanWord+" ")
 		}
 	}
 
