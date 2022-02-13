@@ -17,7 +17,7 @@ func isReady(session *discordgo.Session, ready *discordgo.Ready) {
 func messageHandler(session *discordgo.Session, message *discordgo.MessageCreate) {
 	wordsWrong := make([]string, 0)
 
-	searchString := message.Content
+	searchString := strings.ToLower(message.Content)
 	for canadianWord, americanWord := range WordMap {
 		wordIndex := strings.Index(searchString, canadianWord)
 		if wordIndex != -1 {
