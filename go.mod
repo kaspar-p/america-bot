@@ -21,6 +21,7 @@ require (
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/spf13/viper v1.10.1 // indirect
 	github.com/subosito/gotenv v1.2.0 // indirect
+	github.com/trubitsyn/go-zero-width v1.0.1 // indirect
 	golang.org/x/crypto v0.0.0-20220213190939-1e6e3497d506 // indirect
 	golang.org/x/sys v0.0.0-20220209214540-3681064d5158 // indirect
 	golang.org/x/text v0.3.7 // indirect

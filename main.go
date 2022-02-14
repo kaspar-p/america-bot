@@ -9,17 +9,22 @@ import (
 	"github.com/bwmarrin/discordgo"
 	"github.com/eskriett/confusables"
 	"github.com/spf13/viper"
+	zerowidth "github.com/trubitsyn/go-zero-width"
 )
 
 func isReady(session *discordgo.Session, ready *discordgo.Ready) {
 	log.Println("Successfully connected to discord!")
 }
 
+func clean(unclean string) string {
+	return zerowidth.RemoveZeroWidthSpace(confusables.ToASCII(strings.ToLower(unclean)))
+}
+
 func messageHandler(session *discordgo.Session, message *discordgo.MessageCreate) {
 	wordsWrong := make([]string, 0)
 
-	searchStringWithI := strings.ReplaceAll(message.Content, "I", "l")
-	searchString := confusables.ToASCII(strings.ToLower(message.Content))
+	searchStringWithI := clean(strings.ReplaceAll(message.Content, "I", "l"))
+	searchString := clean(message.Content)
 
 	for canadianWord, americanWord := range WordMap {
 		wordIndex := strings.Index(searchString, canadianWord)
