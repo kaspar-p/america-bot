@@ -42,12 +42,13 @@ func messageHandler(session *discordgo.Session, message *discordgo.MessageCreate
 			log.Println("Error 'typing': ", err)
 			return
 		}
+
 		time.Sleep(1 * time.Second)
 
 		finalMessage := strings.Join(wordsWrong, ", ")
 		_, err = session.ChannelMessageSend(message.ChannelID, finalMessage)
 		if err != nil {
-			log.Println("Error editing message", message.Content, ". Error: ", err)
+			log.Println("Error editing message '"+message.Content+"'. Error: ", err)
 			return
 		}
 	} else {
@@ -71,7 +72,6 @@ func main() {
 	}
 
 	token := viper.GetString("TOKEN")
-	log.Println(token)
 
 	session, err := discordgo.New("Bot " + token)
 	if err != nil {
