@@ -5,6 +5,7 @@ import (
 	"os"
 	"os/signal"
 	"strings"
+	"time"
 
 	"github.com/bwmarrin/discordgo"
 	"github.com/eskriett/confusables"
@@ -36,8 +37,15 @@ func messageHandler(session *discordgo.Session, message *discordgo.MessageCreate
 	}
 
 	if len(wordsWrong) != 0 {
+		err := session.ChannelTyping(message.ChannelID)
+		if err != nil {
+			log.Println("Error 'typing': ", err)
+			return
+		}
+		time.Sleep(1 * time.Second)
+
 		finalMessage := strings.Join(wordsWrong, ", ")
-		_, err := session.ChannelMessageSend(message.ChannelID, finalMessage)
+		_, err = session.ChannelMessageSend(message.ChannelID, finalMessage)
 		if err != nil {
 			log.Println("Error editing message", message.Content, ". Error: ", err)
 			return
