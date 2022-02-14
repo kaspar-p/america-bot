@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"github.com/bwmarrin/discordgo"
+	"github.com/eskriett/confusables"
 	"github.com/spf13/viper"
 )
 
@@ -17,13 +18,18 @@ func isReady(session *discordgo.Session, ready *discordgo.Ready) {
 func messageHandler(session *discordgo.Session, message *discordgo.MessageCreate) {
 	wordsWrong := make([]string, 0)
 
-	searchString := strings.ToLower(message.Content)
+	searchStringWithI := strings.ReplaceAll(message.Content, "I", "l")
+	searchString := confusables.ToASCII(strings.ToLower(message.Content))
+
 	for canadianWord, americanWord := range WordMap {
 		wordIndex := strings.Index(searchString, canadianWord)
-		if wordIndex != -1 {
+		wordWithIIndex := strings.Index(searchStringWithI, canadianWord)
+
+		if wordIndex != -1 || wordWithIIndex != -1 {
 			log.Printf("Replaced %s with %s", canadianWord, americanWord)
 
 			wordsWrong = append(wordsWrong, "*"+americanWord)
+			searchString = strings.Replace(searchString, canadianWord+" ", americanWord+" ", 1)
 			searchString = strings.Replace(searchString, canadianWord+" ", americanWord+" ", 1)
 		}
 	}
@@ -35,6 +41,8 @@ func messageHandler(session *discordgo.Session, message *discordgo.MessageCreate
 			log.Println("Error editing message", message.Content, ". Error: ", err)
 			return
 		}
+	} else {
+		log.Println("Skipping: ", searchString)
 	}
 }
 
