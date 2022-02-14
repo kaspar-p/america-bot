@@ -23,18 +23,14 @@ func clean(unclean string) string {
 func messageHandler(session *discordgo.Session, message *discordgo.MessageCreate) {
 	wordsWrong := make([]string, 0)
 
-	searchStringWithI := clean(strings.ReplaceAll(message.Content, "I", "l"))
 	searchString := clean(message.Content)
 
 	for canadianWord, americanWord := range WordMap {
 		wordIndex := strings.Index(searchString, canadianWord)
-		wordWithIIndex := strings.Index(searchStringWithI, canadianWord)
-
-		if wordIndex != -1 || wordWithIIndex != -1 {
+		if wordIndex != -1 {
 			log.Printf("Replaced %s with %s", canadianWord, americanWord)
 
 			wordsWrong = append(wordsWrong, "*"+americanWord)
-			searchString = strings.Replace(searchString, canadianWord+" ", americanWord+" ", 1)
 			searchString = strings.Replace(searchString, canadianWord+" ", americanWord+" ", 1)
 		}
 	}
